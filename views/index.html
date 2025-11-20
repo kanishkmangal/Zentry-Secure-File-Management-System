@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zentry - Explorer</title>
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+  <div style="display: flex; align-items: center; justify-content: space-between;" class="header">
+    <h1 class="heading">Zentry</h1>
+    <div class="toolbar-actions">
+      <input type="file" id="fileInput" style="display: none;" onchange="uploadFile()" />
+      <button onclick="triggerFileInput()">Upload</button>
+      <button onclick="createFolder()">New Folder</button>
+      <button onclick="deleteSelected()">Delete</button>
+    </div>
+  </div>
+  <div class="main">
+    <div class="container">
+      <div class="sidebar" id="folderTree">
+      </div>
+      <div class="content">
+        <div class="toolbar">
+          <div style="display: flex; gap: 10px;">
+            <button id="backBtn" class="back-button" onclick="goBackOneLevel()"><i class="fas fa-arrow-left" style="margin-right: 6px;"></i></button>
+            <div id="currentPath" class="path-bar"></div>
+          </div>
+        </div>
+        <div class="file-grid" id="fileGrid">
+          <!-- File tiles dynamically injected -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Preview Modal -->
+  <div id="previewModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closePreview()">&times;</span>
+      <div id="previewContent">Loading...</div>
+    </div>
+  </div>
+  <!-- New Folder Modal -->
+  <div id="newFolderModal" class="modal">
+    <div class="modalcontent">
+      <span class="close-btn" onclick="closeFolderModal()">&times;</span>
+      <h3>Create New Folder</h3>
+      <input type="text" id="folderNameInput" placeholder="Folder name" />
+      <button onclick="confirmCreateFolder()">Create</button>
+    </div>
+  </div>
+  <div id="contextMenu" class="context-menu" style="display:none; position:absolute; z-index:1000; background:#333; border:1px solid #666; border-radius:5px; color:white; padding:8px 0; font-size:14px;">
+    <div class="context-item" onclick="contextDelete()">Delete</div>
+    <div class="context-item" onclick="contextRename()">Rename</div>
+    <div class="context-item" onclick="contextMetadata()">Info</div>
+  </div>
+  <script src="../renderer.js"></script>
+</body>
+
+</html>
